@@ -182,7 +182,7 @@ proto.extractStreet = function(regexes, reSplitStreet) {
       // iterate over the street regexes and test them against the various parts
       for (var rgxIdx = 0; rgxIdx < regexes.length; rgxIdx++) {
         // if we have a match, then process
-        if (regexes[rgxIdx].test(parts[ii]) && parts[ii-1] && (! reNumericesque.test(parts[ii-1]))) {
+        if (regexes[rgxIdx][1].test(parts[ii]) && parts[ii-1] && (! reNumericesque.test(parts[ii-1]))) {
           // update the best index and break from the inner loop
           bestIndex = ii;
           break;
@@ -199,9 +199,10 @@ proto.extractStreet = function(regexes, reSplitStreet) {
       // if we have a match, then process
       // if the match is on the first part though, reject it as we
       // are probably dealing with a town name or something (e.g. St George)
-      if (regexes[rgxIdx].test(parts[partIdx]) && partIdx > 0) {
+      if (regexes[rgxIdx][1].test(parts[partIdx]) && partIdx > 0) {
         var startIndex = locateBestStreetPart(partIdx);
-
+        var normalizedSteet = regexes[rgxIdx][0];
+        parts[partIdx] = normalizedSteet || parts[partIdx];
         // if we are dealing with a split street (i.e. foo rd west) and the
         // address parts are appropriately delimited, then grab the next part
         // also

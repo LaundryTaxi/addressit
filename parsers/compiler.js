@@ -7,10 +7,10 @@ module.exports = function(textRegexes) {
   var ii;
 
   for (ii = textRegexes.length; ii--; ) {
-    regexes[ii] = new RegExp(
-      textRegexes[ii].replace(reStreetCleaner, '^$1\,?$'),
-      'i'
-    );
+      regexes[ii] = [textRegexes[ii][0], new RegExp(
+        textRegexes[ii][1].replace(reStreetCleaner, '^$1\,?$'),
+        'i'
+      )];
   } // for
 
   return regexes;

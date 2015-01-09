@@ -25,14 +25,15 @@ var streetRegexes = compiler([
   'BROW',                 // BROW
   'BYPA(SS)?',            // BYPASS / BYPA
   'C(AUSE)?WAY',          // CAUSEWAY / CWAY
+  'CI(RCLE)?',            // CIRCLE / CI
   '(CIRCUIT|CCT)',        // CIRCUIT / CCT
   'CIRC(US)?',            // CIRCUS / CIRC
   'CL(OSE)?',             // CLOSE / CL
   'CO?PSE',               // COPSE / CPSE
   '(CORNER|CNR)',         // CORNER / CNR
   // 'COVE',                 // COVE
-  'C(OUR)?T',             // COURT / CT
-  'CRES(CENT)?',          // CRESCENT / CRES
+  'C(OUR)?T|CRT|CO',      // COURT / CT / CO / CRT
+  'CR(ES)?(CENT)?',       // CRESCENT / CRES / CR
   'DR(IVE)?',             // DRIVE / DR
   // 'END',                  // END
   'ESP(LANANDE)?',        // ESPLANADE / ESP
@@ -107,7 +108,8 @@ module.exports = function(text, opts) {
     // extract the country
     .extract('country', {
         AU: /^AUSTRAL/,
-        US: /(^UNITED\sSTATES|^U\.?S\.?A?$)/
+        US: /(^UNITED\sSTATES|^U\.?S\.?A?$)/,
+        CA: /(^CA(NADA)?$)/
     })
 
     // extract the street
