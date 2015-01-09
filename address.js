@@ -32,8 +32,8 @@ var proto = Address.prototype;
   start of the parts array is reached or we fall back to non-numeric fields
   then the extraction is stopped.
 **/
-proto._extractStreetParts = function(startIndex) {
-  var index = startIndex;
+proto._extractStreetParts = function(indx) {
+  var index = indx;
   var streetParts = [];
   var numberParts;
   var parts = this.parts;
@@ -44,7 +44,7 @@ proto._extractStreetParts = function(startIndex) {
   while (index >= 0 && testFn()) {
     var alphaPart = isNaN(parseInt(parts[index], 10));
 
-    if (streetParts.length < 2 || alphaPart) {
+    if (streetParts.length < 1 || alphaPart) {
       // add the current part to the street parts
       streetParts.unshift(parts.splice(index--, 1));
     }
@@ -106,12 +106,18 @@ proto.clean = function(cleaners) {
   located then the field will be updated from the parts and that part removed
   from the parts list.
 **/
-proto.extract = function(fieldName, regexes) {
+proto.extract = function(fieldName, regexes, opts) {
   var match;
   var rgxIdx;
   var ii;
   var value;
   var lookups = [];
+  var options = opts || {};
+
+  var breakout = options['breakout'] || false;
+  var sideness = options['sideness'] || 'none';
+
+  var self = this;
 
   // if the regexes have been passed in as objects, then convert to an array
   if (typeof regexes == 'object' && typeof regexes.splice == 'undefined') {
@@ -128,27 +134,40 @@ proto.extract = function(fieldName, regexes) {
   }
 
   // iterate over the unit regexes and test them against the various parts
-  for (rgxIdx = 0; rgxIdx < regexes.length; rgxIdx++) {
-    for (ii = this.parts.length; ii--; ) {
-      match = regexes[rgxIdx].exec(this.parts[ii]);
+  var finder = function () {
 
-      // if we have a match, then process
-      if (match) {
-        // if we have a 2nd capture group, then replace the item with
-        // the text of that group
-        if (match[2]) {
-          this.parts.splice(ii, 1, match[2]);
-        }
-        // otherwise, just remove the element
-        else {
-          this.parts.splice(ii, 1);
-        } // if..else
+    for (rgxIdx = 0; rgxIdx < regexes.length; rgxIdx++) {
+      for (ii = self.parts.length; ii--;) {
+        match = regexes[rgxIdx].exec(self.parts[ii]);
 
-        value = lookups[rgxIdx] || match[1];
-      } // if
+        // if we have a match, then process
+        if (match) {
+          // if we have a 2nd capture group, then replace the item with
+          // the text of that group
+          /*if (match[2]) {
+           this.parts.splice(ii, 1, match[2]);
+           }
+           // otherwise, just remove the element
+           else {
+           this.parts.splice(ii, 1);
+           }*/ // if..else
+          self.parts.splice(ii, 1);
+          value = lookups[rgxIdx] || match[1];
+
+          if(sideness && sideness === 'left'){
+
+          }
+          else if(sideness && sideness === 'right'){
+            self[fieldName + 'Post'] = self.parts.splice(ii);
+          }
+
+
+          if (breakout && breakout === true) return;
+        } // if
+      } // for
     } // for
-  } // for
-
+  }
+  finder();
   // update the field value
   this[fieldName] = parseInt(value, 10) || value;
 
@@ -195,20 +214,23 @@ proto.extractStreet = function(regexes, reSplitStreet) {
 
   // iterate over the street regexes and test them against the various parts
   for (var partIdx = parts.length; partIdx--; ) {
+  
+  // 
     for (var rgxIdx = 0; rgxIdx < regexes.length; rgxIdx++) {
       // if we have a match, then process
       // if the match is on the first part though, reject it as we
       // are probably dealing with a town name or something (e.g. St George)
       if (regexes[rgxIdx][1].test(parts[partIdx]) && partIdx > 0) {
-        var startIndex = locateBestStreetPart(partIdx);
-        var normalizedSteet = regexes[rgxIdx][0];
-        parts[partIdx] = normalizedSteet || parts[partIdx];
+        var startIndex = partIdx; //locateBestStreetPart(partIdx);
+        this['streetType'] = regexes[rgxIdx][0] || parts[partIdx];
+        this.parts.splice(startIndex--);
         // if we are dealing with a split street (i.e. foo rd west) and the
         // address parts are appropriately delimited, then grab the next part
         // also
-        if (reSplitStreet.test(parts[startIndex + 1])) {
+
+        /*if (reSplitStreet.test(parts[startIndex + 1])) {
           startIndex += 1;
-        }
+        }*/
 
         this._extractStreetParts(startIndex);
         break;

@@ -17,100 +17,115 @@ var compiler = require('./compiler');
 // suitable.
 
 var streetRegexes = compiler([
-  ['ALLEY', 'ALLE?Y|AL'],               // ALLEY / ALLY / AL
-  ['APPROACH', 'APP(ROACH)?'],          // APPROACH / APP
-  ['ARCADE', 'ARC(ADE)?'],            // ARCADE / ARC
-  ['AVENUE', 'AV(E|ENUE)?'],          // AVENUE / AV / AVE
-  ['BAY', '(BAY|BA|BY)'],     			// BAY / BA / BY
-  ['BOULEVARD', '(BOULEVARD|BLVD|BV|BLV)'],     // BOULEVARD / BLVD / BLV / BV
+  ['AL', 'ALLE?Y|AL'],               // ALLEY / ALLY / AL
+  ['AP', 'APP(ROACH)?'],          // APPROACH / APP
+  ['AR', 'ARC(ADE)?'],            // ARCADE / ARC
+  ['AV', 'AV(E|ENUE)?'],          // AVENUE / AV / AVE
+  ['BA', '(BAY|BA|BY)'],     			// BAY / BA / BY
+  ['BV', '(BOULEVARD|BLVD|BV|BLV)'],     // BOULEVARD / BLVD / BLV / BV
   ['BROW', 'BROW'],                 // BROW
   ['BYPASS', 'BYPA(SS)?'],            // BYPASS / BYPA
-  ['CAPE', 'CA(PE)?'],          	// CAPE / CA
+  ['CA', 'CA(PE)?'],          	// CAPE / CA
   ['CAUSEWAY', 'C(AUSE)?WAY'],          // CAUSEWAY / CWAY
-  ['CENTRE', '(CENTRE|CENTER|CE|CTR)'],      // CENTRE / CENTER / CE / CTR
-  ['CIRCLE', 'CI(RCLE)?|CIR'],            // CIRCLE / CI / CIR
+  ['CE', '(CENTRE|CENTER|CE|CTR)'],      // CENTRE / CENTER / CE / CTR
+  ['CI', 'CI(RCLE)?|CIR'],            // CIRCLE / CI / CIR
   ['CIRCUIT', '(CIRCUIT|CCT)'],        // CIRCUIT / CCT
   ['CIRCUS', 'CIRC(US)?'],            // CIRCUS / CIRC
-  ['CLOSE', 'CL(OSE)?'],             // CLOSE / CL
-  ['COMMON', '(COMMON|CM|CMN)'],               // COMMON / CM / CMN
+  ['CL', 'CL(OSE)?'],             // CLOSE / CL
+  ['CM', '(COMMON|CM|CMN)'],               // COMMON / CM / CMN
   ['COPSE', 'CO?PSE'],               // COPSE / CPSE
   ['CORNER', '(CORNER|CNR)'],         // CORNER / CNR
-  ['COVE', '(COVE|CV)'],               // COVE / CV
-  ['COURT', 'C(OUR)?T|CRT|CO'],      // COURT / CT / CO / CRT
-  ['CRESCENT', 'CR(ES)?(CENT)?'],       // CRESCENT / CRES / CR
-  ['DRIVE', 'DR(IVE)?|DRV'],             // DRIVE / DR
+  ['CV', '(COVE|CV)'],               // COVE / CV
+  ['CO', 'C(OUR)?T|CRT|CO'],      // COURT / CT / CO / CRT
+  ['CR', 'CR(ES)?(CENT)?'],       // CRESCENT / CRES / CR
+  ['DR', 'DR(IVE)?|DRV'],             // DRIVE / DR
   // 'END',                  // END
   ['ESPLANANDE', 'ESP(LANANDE)?'],        // ESPLANADE / ESP
   // 'FLAT'],                 // FLAT
   ['FREEWAY', 'F(REE)?WAY'],           // FREEWAY / FWAY
   ['FRONTAGE', '(FRONTAGE|FRNT)'],      // FRONTAGE / FRNT
-  ['GARDENS', '(GARDENS?|GD|GDNS?|GARS?)'],       // GARDENS / GARDEN / GD / GDNS / GAR / GARS
-  ['GATE', '(GATE|GA|GT)'],          // GATE / GA / GT
+  ['GD', '(GARDENS?|GD|GDNS?|GARS?)'],       // GARDENS / GARDEN / GD / GDNS / GAR / GARS
+  ['GA', '(GATE|GA|GT)'],          // GATE / GA / GT
   ['GLADE', '(GLADE|GLD)'],          // GLADE / GLD
   // 'GLEN',                 // GLEN
   ['GREEN', 'GR(EE)?N|GR'],             // GREEN / GRN / GR
-  ['GROVE', 'GROVE|GR?V'],             // GROVE / GRV / GV
-  ['HEATH', 'HE(ATH)?'],        // HEATH / HE
-  ['HEIGHTS', '(H(EIGH)?TS|HT)'],        // HEIGHTS / HTS / HT
-  ['HIGHWAY', '(HI(GHWAY)?|HWY)'],        // HIGHWAY / HWY / HI
-  ['HILL', '(HILLS?|HL)'],        // HILL / HILLS / HL
-  ['ISLAND', '(IS(LAND)?|ISLE)'],            // ISLAND / IS / ISLE
-  ['LANDING', '(LD|LANDING)'],            // LANDING / LD
-  ['LANE', '(LANE|LN)'],            // LANE / LN
-  ['LINK', '(LI(NK)?|LN?K)'],         // LINK / LI / LNK / LK
+  ['GV', 'GROVE|GR?V'],             // GROVE / GRV / GV
+  ['HE', 'HE(ATH)?'],        // HEATH / HE
+  ['HT', '(H(EIGH)?TS|HT)'],        // HEIGHTS / HTS / HT
+  ['HI', '(HI(GHWAY)?|HWY)'],        // HIGHWAY / HWY / HI
+  ['HL', '(HILLS?|HL)'],        // HILL / HILLS / HL
+  ['IS', '(IS(LAND)?|ISLE)'],            // ISLAND / IS / ISLE
+  ['LD', '(LD|LANDING)'],            // LANDING / LD
+  ['LN', '(LANE|LN)'],            // LANE / LN
+  ['LI', '(LI(NK)?|LN?K)'],         // LINK / LI / LNK / LK
   ['LOOP', 'LOOP'],                 // LOOP
   ['MALL', 'MALL'],                 // MALL
-  ['MANOR', 'M(ANO)?R'],    // MANOR / MR
-  ['MEWS', '(MEWS?|ME|MW)'],   // MEWS / MEW / ME / MW
-  ['MOUNT', '(M(OUN)?T|MNT)'],   // MOUNT / MT / MNT
+  ['MR', 'M(ANO)?R'],    // MANOR / MR
+  ['ME', '(MEWS?|ME|MW)'],   // MEWS / MEW / ME / MW
+  ['MT', '(M(OUN)?T|MNT)'],   // MOUNT / MT / MNT
   ['PACKET', '(PACKET|PCKT)'],        // PACKET / PCKT
-  ['PARADE', '(P(ARA)?DE|PRD?|PRDE)'],            // PARADE / PDE, PR /PRD / PRDE
-  ['PARK', '(P(AR)?K|PA)'],            // PARK / PA / PK
-  ['PARKWAY', '(P(ARKWA)?Y|PKWY)'],       // PARKWAY / PKWY / PY
-  ['PASSAGE', '(PASSAGE|P(AS)?S)'],       // PASSAGE / PS / PASS
-  ['PATH', 'P(AT)?H'],       // PATH / PH
-  ['PLACE', 'PL(ACE)?'],             // PLACE / PL
-  ['PLAZA', '(PLAZA|PZ|PLZ)'],             // PLAZA / PLZ / PZ
-  ['POINT', '(P(OIN)?T|PNT)'],             // POINT / PT / PNT
+  ['PR', '(P(ARA)?DE|PRD?|PRDE)'],            // PARADE / PDE, PR /PRD / PRDE
+  ['PA', '(P(AR)?K|PA)'],            // PARK / PA / PK
+  ['PY', '(P(ARKWA)?Y|PKWY)'],       // PARKWAY / PKWY / PY
+  ['PS', '(PASSAGE|P(AS)?S)'],       // PASSAGE / PS / PASS
+  ['PH', 'P(AT)?H'],       // PATH / PH
+  ['PL', 'PL(ACE)?'],             // PLACE / PL
+  ['PZ', '(PLAZA|PZ|PLZ)'],             // PLAZA / PLZ / PZ
+  ['PT', '(P(OIN)?T|PNT)'],             // POINT / PT / PNT
   ['PROMENADE', 'PROM(ENADE)?'],         // PROMENADE / PROM
   ['RESERVE', 'RES(ERVE)?'],           // RESERVE / RES
   // 'RI?DGE'],               // RIDGE / RDGE
-  ['RISE', 'RI(SE)?'],                 // RISE / RI
-  ['ROAD', 'R(OA)?D'],              // ROAD / RD
-  ['ROW', 'ROW?'],                  // ROW / RO
-  ['SQUARE', 'SQ(UARE)?'],            // SQUARE / SQ
-  ['STREET', '(ST(REET)?|STR)'],            // STREET / ST / STR
+  ['RI', 'RI(SE)?'],                 // RISE / RI
+  ['RD', 'R(OA)?D'],              // ROAD / RD
+  ['RO', 'ROW?'],                  // ROW / RO
+  ['SQ', 'SQ(UARE)?'],            // SQUARE / SQ
+  ['ST', '(ST(REET)?|STR)'],            // STREET / ST / STR
   ['STRIP', 'STRI?P'],               // STRIP / STRP
   ['TARN', 'TARN'],                 // TARN
-  ['TERRACE', '(T(ERRA)?CE|TC)'],           // TERRACE / TCE / TC
+  ['TC', '(T(ERRA)?CE|TC)'],           // TERRACE / TCE / TC
   ['THOROUGHFARE', '(THOROUGHFARE|TFRE)'],  // THOROUGHFARE / TFRE
   ['TRACK', 'TRACK?'],               // TRACK / TRAC
-  ['TRAIL', 'TR(AIL)?'],               // TRAIL / TR
+  ['TR', 'TR(AIL)?'],               // TRAIL / TR
   ['TRUNKWAY', 'T(RUNK)?WAY'],          // TRUNKWAY / TWAY
-  ['VIEW', 'V(IE)?W'],               // VIEW / VW
-  ['VILAS', 'VI(LAS)?'],               // VILAS / VI
+  ['VW', 'V(IE)?W'],               // VIEW / VW
+  ['VI', 'VI(LAS)?'],               // VILAS / VI
   ['VISTA', 'VI?STA'],               // VISTA / VSTA
-  ['WALK', 'W(AL)?K'],                 // WALK / WK
-  ['WAY', 'WA?Y'],                 // WAY / WY
+  ['WK', 'W(AL)?K'],                 // WALK / WK
+  ['WY', 'WA?Y'],                 // WAY / WY
   ['WALKWAY', 'W(ALK)?WAY'],           // WALKWAY / WWAY
   ['YARD', 'YARD']                  // YARD
 ]);
 
-var reSplitStreet = /^(N|NTH|NORTH|E|EST|EAST|S|STH|SOUTH|W|WST|WEST|NW|SW|NE|SE|N\.W\.|N\.E\.|S\.W\.|S\.E\.)\,$/i;
+var reSplitStreet = /^(N|NTH|NORTH|E|EST|EAST|S|STH|SOUTH|W|WST|WEST|NW|SW|NE|SE)\,$/i;
 
 module.exports = function (text, opts) {
     return new Address(text, opts)
       // clean the address
       .clean([
-          // remove trailing dots from two letter abbreviations
+          // remove trailing dots from one or two letter abbreviations
           function (input) {
-              return input.replace(/(\w{2})\./g, '$1');
+              return input.replace(/(\w{1,2})\./g, '$1');
           },
 
+          // remove trailing dots and commas and replace with space
+          function (input) {
+              return input.replace(/(\.|,)/g, ' ');
+          },
+		  
           // convert shop to a unit format
           function (input) {
               return input.replace(/^\s*SHOP\s?(\d*)\,?\s*/i, '$1/');
-          }
+          },
+		  
+		  // tighten spaced meanings
+		  function (input) {
+              input = input.replace(/SOUTH\sEAST/i, 'SE');
+              input = input.replace(/SOUTH\sWEST/i, 'SW');
+              input = input.replace(/NORTH\sEAST/i, 'NE');
+              input = input.replace(/NORTH\sWEST/i, 'NW');
+			  return input;
+          },
+		  
       ])
 
       // split the address
@@ -124,10 +139,44 @@ module.exports = function (text, opts) {
 
       // extract the country
       .extract('country', {
-          AU: /^AUSTRAL/,
-          US: /(^UNITED\sSTATES|^U\.?S\.?A?$)/,
-          CA: /(^CA(NADA)?$)/
-      })
+          AU: /^AUSTRAL/i,
+          US: /(^UNITED\sSTATES|^U\.?S\.?A?$)/i,
+          CANADA: /(^CA(NADA)?$)/i
+      }, {breakout:true, sideness:'right'})
+
+      // extract the province
+      .extract('province', {
+          ALBERTA: /^(AL(BERTA)?|AB)$/i,
+          ON: /^(ONT$|ON(TARIO)?)/i,
+          QC: /^(QC$|QUEBEC|PQ)/i,
+          NS: /^(NS|NOVA\sSCOTIA)/i,
+          NB: /^(NB|NEW\sBRUNSWICK)/i,
+          MB: /^(M(ANITO)?BA?)/i,
+          PE: /^(P(RINCE\s)?E(DWARD\s)?I?(SLAND)?)/i,
+          SK: /^(S(AS)?K(ATCHEWAN)?)/i,
+          NL: /^(N(EW)?F?(OUN)?D?L?(AND)?)/i,
+          NT: /^(N(ORTH)?W?(EST)?\s?T?(ERRITORIES)?)$/i,
+          YT: /^(YU?K?(ON)?T?)/i,
+          NU: /^(YU?K?(ON)?T?)/i
+      }, {breakout:true, sideness:'right'})
+
+      // extract the city
+      .extract('city', {
+          CALGARY: /^CAL(GARY)?$/i,
+          AIRDRIE: /^AIRDRIE$/i,
+          EDMONTON: /^EDMONTON$/i,
+          COCHRANE: /^COCHRANE$/i,
+          OKOTOKS: /^OKOTOKS$/i,
+          CHESTERMERE: /^CHESTERMERE$/i
+      }, {breakout:true, sideness:'right'})
+
+      // extract the direction
+      .extract('direction', {
+          NW: /^NW/i,
+          NE: /^NE/i,
+          SW: /^SW/i,
+          SE: /^SE/i
+      }, {breakout:true, sideness:'right'})
 
       // extract the street
       .extractStreet(streetRegexes, reSplitStreet)
