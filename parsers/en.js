@@ -146,16 +146,17 @@ module.exports = function (text, opts) {
 
       // extract the province
       .extract('province', {
-          ALBERTA: /^(AL(BERTA)?|AB)$/i,
-          ON: /^(ONT$|ON(TARIO)?)/i,
+          ALBERTA: /^(AL(BER)?(TA)?|A\.?B\.?)$/i,
+          ON: /^(O\.?N\.?T\.?$|ON(TARIO)?)$/i,
+          BC: /^(BC|B\.C(\.)?|BRITISH\sCOLUMBIA)$/i,
           QC: /^(QC$|QUEBEC|PQ)/i,
           NS: /^(NS|NOVA\sSCOTIA)/i,
           NB: /^(NB|NEW\sBRUNSWICK)/i,
           MB: /^(M(ANITO)?BA?)/i,
           PE: /^(P(RINCE\s)?E(DWARD\s)?I?(SLAND)?)/i,
           SK: /^(S(AS)?K(ATCHEWAN)?)/i,
-          NL: /^(N(EW)?F?(OUN)?D?L?(AND)?)/i,
-          NT: /^(N(ORTH)?W?(EST)?\s?T?(ERRITORIES)?)$/i,
+          NL: /^(N(EW)?F(OUN)?D?L?(AN)?D?)|NL$/i,
+          NT: /^(NORTH\sWEST\sTERRITORIES|NWT|NT|N\.W\.T\.)/i,
           YT: /^(YU?K?(ON)?T?)/i,
           NU: /^(YU?K?(ON)?T?)/i
       }, {breakout:true, sideness:'right'})
