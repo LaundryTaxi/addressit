@@ -253,6 +253,9 @@ proto.finalize = function() {
       return region.length;
   });
 
+  // clean out numeric ordinal abbreviations
+  this.street = this.street.replace(/(\d+)(th|rd|nd|st)\b/g, '$1');
+  
   // reset the parts
   this.parts = [];
 
